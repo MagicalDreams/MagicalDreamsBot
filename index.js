@@ -32,7 +32,7 @@ bot.on('ready', () =>{
     console.log(`[VERIFYBOT] Connected as ${client.user.username}#${client.user.discriminator} ${client.user.id}`)
 })
     
-})
+
 
 
 
