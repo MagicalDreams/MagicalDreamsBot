@@ -1,4 +1,4 @@
-const {Client, RichEmbed, Discord, Guild} = require('discord.js')
+const {Client, RichEmbed, Discord, Guild, discordPresence} = require('discord.js')
 'use_strict'
 const bot = new Client();
 const guild = new Guild();
@@ -6,6 +6,24 @@ const config = require('./config.json')
 var score = 110;
 
 const completemsg = `Thank you for agreeing to the rules and code of conduct! You are now a verified member of the guild! \nFeel free to choose what roles you’d like, introduce yourself or check out a our other channels. \n\n**Your unique token is your signature that you have read and understood our rules.**\n`
+
+
+ UpdatePresence()
+{
+    memset(discordPresence, 0, sizeof(discordPresence));
+    discordPresence.state = "Playing with Magical Friends";
+    discordPresence.details = "Competitive";
+    discordPresence.startTimestamp = 1507665886;
+    discordPresence.endTimestamp = 1507665886;
+    discordPresence.largeImageText = "Numbani";
+    discordPresence.smallImageText = "Rogue - Level 100";
+    discordPresence.partyId = "ae488379-351d-4a4f-ad32-2b9b01c91657";
+    discordPresence.partySize = 1;
+    discordPresence.partyMax = 5;
+    discordPresence.spectateSecret = "MTIzNDV8MTIzNDV8MTMyNDU0";
+    discordPresence.joinSecret = "MTI4NzM0OjFpMmhuZToxMjMxMjM= ";
+    Discord_UpdatePresence(discordPresence);
+}
 
 
 const shortcode = (n) => {
