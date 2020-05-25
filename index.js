@@ -1,4 +1,4 @@
-const {Client, RichEmbed} = require('discord.js')
+const {Client, RichEmbed, Discord} = require('discord.js')
 'use_strict'
 const bot = new Client();
 const config = require('./config.json')
