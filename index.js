@@ -8,6 +8,9 @@ var score = 110;
 const completemsg = `Thank you for agreeing to the rules and code of conduct! You are now a verified member of the guild! \nFeel free to choose what roles you’d like, introduce yourself or check out a our other channels. \n\n**Your unique token is your signature that you have read and understood our rules.**\n`
 
 
+
+
+/*
  bot.UpdatePresence()
  {
     memset(discordPresence, 0, sizeof(discordPresence));
@@ -24,7 +27,7 @@ const completemsg = `Thank you for agreeing to the rules and code of conduct! Yo
     discordPresence.joinSecret = "MTI4NzM0OjFpMmhuZToxMjMxMjM= ";
     Discord_UpdatePresence(discordPresence);
 }
-
+*/
 
 const shortcode = (n) => {
     const possible = 'ABCDEFGHIJKLMNPQRSTUVWXYZabcdefghjklmnopqrstuvwxyz0123456789'
