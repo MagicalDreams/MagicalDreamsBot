@@ -1,7 +1,7 @@
 const {Client, RichEmbed, Discord, Guild} = require('discord.js')
 'use_strict'
 const bot = new Client();
-const guild = new guild();
+const guild = new Guild();
 const config = require('./config.json')
 var score = 110;
 
