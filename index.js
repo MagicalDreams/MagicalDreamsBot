@@ -29,7 +29,7 @@ bot.on('ready', () =>{
 
     bot.user.setActivity('for !help', {type: 'WATCHING'})
 
-    console.log(`[VERIFYBOT] Connected as ${client.user.username}#${client.user.discriminator} ${client.user.id}`)
+    console.log(`[VERIFYBOT] Connected as ${bot.user.username}#${bot.user.discriminator} ${bot.user.id}`)
 })
     
 
@@ -47,7 +47,7 @@ client.on('guildMemberAdd', (member) => {
 
 const verifymsg = 'I agree to abide by all rules. My token is {token}.'
 
-client.on('message', (message) => {
+bot.on('message', (message) => {
     if (message.author.bot || !message.author.token || message.channel.type !== `dm`) return
     if (message.content !== (verifymsg.replace('{token}', message.author.token))) return
     message.channel.send({
@@ -60,22 +60,22 @@ client.on('message', (message) => {
             }
         }
     })
-    client.guilds.get(config.guild).member(message.author).roles.add(config.role) // ensure this is a string in the config ("")
+    bot.guilds.get(config.guild).member(message.author).roles.add(config.role) // ensure this is a string in the config ("")
         .then(console.log(`TOKEN: ${message.author.token} :: Role ${config.role} added to member ${message.author.id}`))
         .catch(console.error)
 })
 
-client.on('disconnect', (event) => {
-    setTimeout(() => client.destroy().then(() => client.login(config.token)), 10000)
+bot.on('disconnect', (event) => {
+    setTimeout(() => bot.destroy().then(() => bot.login(config.token)), 10000)
     console.log(`[DISCONNECT] Notice: Disconnected from gateway with code ${event.code} - Attempting reconnect.`)
 })
 
-client.on('reconnecting', () => {
+bot.on('reconnecting', () => {
     console.log(`[NOTICE] ReconnectAction: Reconnecting to Discord...`)
 })
 
-client.on('error', console.error)
-client.on('warn', console.warn)
+bot.on('error', console.error)
+bot.on('warn', console.warn)
 
 process.on('unhandledRejection', (error) => {
     console.error(`Uncaught Promise Error: \n${error.stack}`)
@@ -87,7 +87,7 @@ process.on('uncaughtException', (err) => {
 })
 
 
-//Client.on("messageDelete", (messageDelete) => {
+//bot.on("messageDelete", (messageDelete) => {
    //     const channel = messageDelete.guild.channels.find(ch => ch.name === 'log-stuff');channel.send(`The message : "${messageDelete.content}" by ${messageDelete.author} was deleted. There ID is ${messageDelete.author.id}`)
   //     }); 
 
