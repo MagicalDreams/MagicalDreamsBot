@@ -29,15 +29,12 @@ bot.on('ready', () =>{
 
     bot.user.setActivity('for !help', {type: 'WATCHING'})
 
+    console.log(`[VERIFYBOT] Connected as ${client.user.username}#${client.user.discriminator} ${client.user.id}`)
+})
     
 })
 
-const client = new Discord.Client()
 
-client.on('ready', () => {
-    client.user.setActivity(config.playing)
-    console.log(`[VERIFYBOT] Connected as ${client.user.username}#${client.user.discriminator} ${client.user.id}`)
-})
 
 client.on('guildMemberAdd', (member) => {
     if (member.user.bot || member.guild.id !== config.guild) return
