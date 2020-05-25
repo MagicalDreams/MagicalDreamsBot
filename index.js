@@ -36,7 +36,7 @@ bot.on('ready', () =>{
 
 
 
-client.on('guildMemberAdd', (member) => {
+bot.on('guildMemberAdd', (member) => {
     if (member.user.bot || member.guild.id !== config.guild) return
     const token = shortcode(8)
     const welcomemsg = `Welcome to the guild! We hope you find a home here! Check out the \`#general\` channel to make sure that we jive, and as long as our goals are similar, then there’s a place at the table waiting for you. \n\n If you accept the code of conduct, please verify your agreement by replying to **this DM** with the verification phrase: \n\n\`I agree to abide by all rules. My token is ${token}.\`\n\n **This message is case-sensitive, and please include the period at the end! ** \n\nQuestions? Get at a staff member in the server or via DM.`
