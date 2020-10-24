@@ -43,14 +43,7 @@ bot.on('ready' , (oldMessage, newMessage) =>{
 
     bot.user.setActivity('md!help', {type: 'Watching'})
     
-    
-    const guild = bot.guilds.get("365007577060212736");
-    
-   let Manager = guild.roles.find("name", "Manager");
-let Coord = guild.roles.find("name", "Coordinator");
-let Dev = guild.roles.find("name", "Developer");
-let CM = guild.roles.find("name", "Cast Member");
-let IN = guild.roles.find("name", "Intern");
+   
 
     
 })
@@ -191,15 +184,7 @@ bot.on("messageReactionAdd", async (reaction, user) => {
 bot.on('message', msg=>{
 
     let args = msg.content.substring(PREFIX.length).split(' ')
-    
-        const guild = bot.guilds.get("365007577060212736");
-    
-   let Manager = guild.roles.find("name", "Manager");
-let Coord = guild.roles.find("name", "Coordinator");
-let Dev = guild.roles.find("name", "Developer");
-let CM = guild.roles.find("name", "Cast Member");
-let IN = guild.roles.find("name", "Intern");
-
+   
 
     switch (args[0]) {
         case 'mute':
