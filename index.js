@@ -146,11 +146,11 @@ bot.on("guildMemberAdd", member => {
     member.send("• Respect all staff member decisions, although if you feel like a staff member is abusing their power - contact a Manager. • If a post or rule is in question, contact a Cast Member and they will make the final judgement. • Be respectful to one another and do not cause drama. • Breaking these rules could result in a kick, ban, or mute. Follow these rules and have fun!!")
         .catch(console.error);
         
-            const JoinEmbed = new RichEmbed()
-            .setColor('RANDOM')
-            .setTitle('Magical Dreams: Verify')
-            .addField('After you have read all of this, react to this message!')
-            member.send(JoinEmbed)
+         //   const JoinEmbed = new RichEmbed()
+           // .setColor('RANDOM')
+          //  .setTitle('Magical Dreams: Verify')
+         //   .addField('After you have read all of this, react to this message!')
+         //   member.send(JoinEmbed)
 
             
     
