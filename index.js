@@ -199,7 +199,6 @@ bot.on('message', msg=>{
     
     switch(args[0]){
         case 'play':
-             if(error) throw error
                     msg.channel.send('✅ Okay, Adding song to queue! 👍')
 
          score = score+1;
