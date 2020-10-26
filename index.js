@@ -43,10 +43,146 @@ bot.on('ready' , (oldMessage, newMessage) =>{
 
     bot.user.setActivity('md!help', {type: 'Watching'})
     
-   
+    
+    const guild = bot.guilds.get("365007577060212736");
+    
+   let Manager = guild.roles.find("name", "Manager");
+let Coord = guild.roles.find("name", "Coordinator");
+let Dev = guild.roles.find("name", "Developer");
+let CM = guild.roles.find("name", "Cast Member");
+let IN = guild.roles.find("name", "Intern");
 
     
 })
+
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+/*
+///////////////////////////  CONFIGURE TWITTER HANDLERS /////////////////////////////////////////////////////
+var THandlers=[
+    {
+        name:'TwitterWeb',
+        url:"https://https://twitter.com/MagicalDreamDev",
+        webhook:"https://discordapp.com/api/webhooks/717587493943509064/u_0tBCJYCKrR9Ki9tJ52q7SFI-30-k9GYNyfubeY05m1p2Ff9KFN0vE42ii9wGTPOW9g",
+        avatar_url:"https://twitter.com/MagicalDreamDev/photo",
+        keywords:"[STATUS]",
+    }
+];
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//ADD TWEETS
+THandlers.forEach((th,i) => {
+    tweets[th.url] = [];
+    apiurls.push(th.url);
+});
+//DISCORD WEBHOOK
+const sendDiscordMessage = (pl) => {
+    const {content,turl} = pl;
+    const {name,webhook,avatar_url} = THandlers.filter((d,i) => d.url === turl)[0];
+    request.post(webhook).form({username:name,avatar_url:avatar_url,content:content});
+}
+console.log('Twitter => Discord program is running');
+//MONITOR
+setInterval(() => {
+    async.map(apiurls, function(item, callback){
+        request({url: item, pool: separateReqPool}, function (error, response, body) {
+            try {
+                const $ = cheerio.load(body);
+                var turl = "https://twitter.com" + response.req.path;
+                if(!tweets[turl].length){
+                    //FIRST LOAD
+                    for(let i=0;i<$('div.js-tweet-text-container p').length;i++){
+                        tweets[turl].push($('div.js-tweet-text-container p').eq(i).text());
+                    }
+                }
+                else{
+                    //EVERY OTHER TIME
+                    for(let i=0;i<$('div.js-tweet-text-container p').length;i++){
+                        const s_tweet = $('div.js-tweet-text-container p').eq(i).text();
+                        //CHECK IF TWEET IS NEWS
+                        if(tweets[turl].indexOf(s_tweet) === -1){
+                            tweets[turl].push(s_tweet);
+                            const th_kw = THandlers.filter((d,i) => d.url === turl)[0].keywords.split(',');
+                            const th_name = THandlers.filter((d,i) => d.url === turl)[0].name; 
+                            let nFlag=false;
+                            th_kw.forEach((kw,j) => {
+                                if(kw === '*'){
+                                    nFlag=true;
+                                }
+                                else{
+                                   if(s_tweet.indexOf(kw) != -1){
+                                        nFlag=true;
+                                    }
+                                }
+                            });
+                            if(nFlag){
+                               sendDiscordMessage({content:s_tweet,turl:turl});
+                            }
+                        }
+                    }
+                }           
+                 
+            } catch (e) {
+                  console.log('Error =>' + e);
+            }
+        });
+    }, function(err, results){
+            //console.log(results);
+    });
+},1000);//RUNS EVERY 1 SECONDS
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+*/
+
+
+
+
+
+
+
+bot.on("guildMemberAdd", member => {
+    
+    
+
+
+    member.send("Welcome to our server! ")
+    member.send("Here are the rules:")
+    member.send("• No spamming in chats - This includes but is not limited to, loud/obnoxious noises in voice, @mention spam, character spam, image spam, and message • Do not make fun of, or bully other park guests. - Keeping a friendly, fun environment is enjoyable for all guests! • No advertising other servers or organizations. - Do not link to other Minecraft/Discord servers. - Do not link YouTube or Twitch channels. - Do not link any social media platforms (Twitter, Instagram, Facebook, etc). This excludes the official MagicalDreams platforms and/or any of our partners. • Sharing of personal information (like passwords) or doxing is prohibited. ")
+    member.send("• Don't post NSFW/offensive/harmful content. • Use the appropriate channels and abide by their descriptions. • Please avoid using offensive or vulgar language, we maintain a family-friendly network • Do not ping staff members or executives constantly or for no reason")
+    member.send("• Respect all staff member decisions, although if you feel like a staff member is abusing their power - contact a Manager. • If a post or rule is in question, contact a Cast Member and they will make the final judgement. • Be respectful to one another and do not cause drama. • Breaking these rules could result in a kick, ban, or mute. Follow these rules and have fun!!")
+        .catch(console.error);
+        
+            const JoinEmbed = new RichEmbed()
+            .setColor('RANDOM')
+            .setTitle('Magical Dreams: Verify')
+            .addField('After you have read all of this, react to this message!')
+            member.send(JoinEmbed)
+
+            
+    
+    
+});
+
+bot.on("messageReactionAdd", async (reaction, user) => {
+    // If a message gains a reaction and it is uncached, fetch and cache the message.
+    // You should account for any errors while fetching, it could return API errors if the resource is missing.
+    if (reaction.message.partial) await reaction.message.fetch(); // Partial messages do not contain any content so skip them.
+    if (reaction.partial) await reaction.fetch();
+    
+    if (user.bot) return; // If the user was a bot, return.
+    if (!reaction.message.guild) return; // If the user was reacting something but not in the guild/server, ignore them.
+    if (reaction.message.guild.id !== "708395721782722581") return; // Use this if your bot was only for one server/private server.
+    
+    if (reaction.message.channel.id === "756614228605009961") { // This is a #self-roles channel.
+      if (reaction.emoji.name === "white_check_mark") {
+         reaction.message.guild.members.cache.get(user.id).roles.add("756612432830398606") // Minecraft role.
+         reaction.message.guild.members.cache.get(user.id).roles.remove("756625090917171245")
+        }
+      
+    }
+  })
+
 
 
 
@@ -55,6 +191,67 @@ bot.on('ready' , (oldMessage, newMessage) =>{
 bot.on('message', msg=>{
 
     let args = msg.content.substring(PREFIX.length).split(' ')
+    
+        const guild = bot.guilds.get("365007577060212736");
+    
+   let Manager = guild.roles.find("name", "Manager");
+let Coord = guild.roles.find("name", "Coordinator");
+let Dev = guild.roles.find("name", "Developer");
+let CM = guild.roles.find("name", "Cast Member");
+let IN = guild.roles.find("name", "Intern");
+
+
+    switch (args[0]) {
+        case 'mute':
+
+
+            msg.delete();
+        
+            var person  = msg.guild.member(msg.mentions.users.first() || msg.guild.members.get(args[1]));
+            if(!person) return  msg.reply("I CANT FIND THE USER " + person)
+ 
+            let mainrole = msg.guild.roles.find(role => role.name === "{Verified}");
+            let role = msg.guild.roles.find(role => role.name === "Muted");
+           
+ 
+            if(!role) return msg.reply("Couldn't find the mute role.")
+ 
+ 
+            let time = args[2];
+            if(!time){
+                return msg.reply("You didnt specify a time!");
+            }
+ 
+            person.removeRole(mainrole.id)
+            person.addRole(role.id);
+ 
+ 
+            msg.channel.send(`@${person.user.tag} has now been muted for ${ms(ms(time))}`)
+ 
+            setTimeout(function(){
+                
+                person.addRole(mainrole.id)
+                person.removeRole(role.id);
+                console.log(role.id)
+                msg.channel.send(`@${person.user.tag} has been unmuted.`)
+            }, ms(time));
+ 
+ 
+    
+        break;
+    }
+
+/*
+    if (msg.
+    .roles((role) => role.name === 'Nitro Boosters')){
+        msg.member.roles.add(715394475869863996); //MD Server
+        msg.member.roles.add(721976858006126632); //Testing Server
+    }else{
+        return;
+    }
+*/
+    
+
     
     
     switch(args[0]){
@@ -126,6 +323,7 @@ bot.on('message', msg=>{
 
         case 'stop':
             var server = servers[msg.guild.id]; 
+
             if(msg.guild.voiceConnection){
                 for(var i = server.queue.length - 1; i>=0; i--){
                     server.queue.splice(i, 1);
