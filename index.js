@@ -309,6 +309,7 @@ bot.on('message', msg=>{
         case 'stop':
             var server = servers[msg.guild.id]; 
 
+            
             if(msg.guild.voiceConnection){
                 for(var i = server.queue.length - 1; i>=0; i--){
                     server.queue.splice(i, 1);
